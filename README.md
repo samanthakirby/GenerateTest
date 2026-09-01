@@ -36,6 +36,11 @@ Creating test data: 5 minutes
 Create POM: 15 minutes
 Creating specs: 30 minutes
 
-# Wasn't requested but IMO added value and counted outside of the above
+## Wasn't requested but IMO added value and counted outside of the above
 I spent 10 minutes on the CI pipeline stuff
 I spend 15 minutes logging bugs under [Issues](https://github.com/samanthakirby/GenerateTest/issues)
+I also spend 10 minutes manually testing the page. I don't believe you can automate something you haven't manually tested.
+
+## Where did AI come in?
+I wasn't too sure how to get around the CloudFlare limit and knew I didn't have time to research it myself so I offloaded that solution to Claude. The file it created was asset-cache.ts. 
+The other one, which I do know how to craft but didn't have time, was pdf.ts. This is because I didn't just want to assert that the pdf downloaded, but also that it contained the correct date. This felt like a quick win for something that would be important to make sure customers are getting the correct pdf i.e. 1 Dec 2025.
