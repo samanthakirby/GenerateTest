@@ -14,7 +14,7 @@ npm run test:defects # this will show you the known defects and their reporting 
 ```
 
 ## CI-pipeline
-I added these to the CI pipeline eg [this run](https://github.com/samanthakirby/GenerateTest/actions/runs/33486894409/job/99789039915). I only have the playwright.yml running on the pipeline so that PRs aren't rejected because of known defects in this repo
+I added these to the CI pipeline eg [this run](https://github.com/samanthakirby/GenerateTest/actions/runs/33493327678). I only have the playwright.yml running on the pipeline so that PRs aren't rejected because of known defects in this repo
 
 ## Core Tasks
 1. **Validation coverage** – Documented as requested in the specs and NOTES.MD
