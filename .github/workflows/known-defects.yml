@@ -1,0 +1,66 @@
+name: Known defects (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: known-defects-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  defects:
+    name: Known defects
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the known-defect tests
+        id: defects
+        continue-on-error: true
+        run: npm run test:defects
+
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "## Known defects"
+            echo
+            if [ "${{ steps.defects.outcome }}" = "success" ]; then
+              echo "> [!IMPORTANT]"
+              echo "> **Every known-defect test passed.** These tests assert the behaviour the"
+              echo "> form *should* have, so passing means the underlying bugs appear to be"
+              echo "> fixed. Re-check each one by hand, then convert them into normal passing"
+              echo "> tests and update NOTES.md."
+            else
+              echo "These tests are **expected to fail** — each failure is a bug report, and the"
+              echo "assumed business rule is attached to each test as an annotation."
+              echo "See \`NOTES.md\` for the full write-up."
+            fi
+            echo
+            echo "Download the **playwright-report-defects** artifact below for the screenshot,"
+            echo "video and trace behind each result."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-defects
+          path: playwright-report-defects/
+          retention-days: 14

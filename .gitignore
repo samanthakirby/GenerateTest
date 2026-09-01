@@ -1,0 +1,15 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Local asset cache used to keep the suite under the target CDN rate limit
+.cache/
+/playwright-report-defects/
+/test-results-defects/
+
+# macOS
+.DS_Store
