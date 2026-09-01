@@ -149,3 +149,5 @@ The principles behind it:
 - **POMS holds every selector and every DOM quirk for their page.** A new joiner never needs to know that the date picker needs Enter, or that the checkbox is `opacity-0` under its own label, those are solved once, in a named method, with a comment explaining why. If the form changes, there's one file to fix.
 - **Specs read as behaviour, not mechanics.** `unticked PDS consent alone blocks submission` tells you the rule without you reading the body. Numbered files give an obvious reading order: start at 01, finish at the happy path.
 - **Comments explain why, never what.** `await page.click()` doesn't need a comment; "Escape leaves the visible text populated but the model empty" saves the next person time. (I ran out of time to comment but I usually add quite a few)
+
+With more time, I would have written a claude skill that would help onboard new members as well as the standards for the framework so that AI agents can be used to speed up the test creation cycle.
